@@ -1,0 +1,42 @@
+﻿@model IdentityMessageProject.EntityLayer.Concrete.Message
+@{
+    ViewData["Title"] = "New Message";
+    Layout = "~/Views/Shared/_MessageLayout.cshtml";
+}
+
+<section class="bg-white bg-opacity-90 p-8 shadow-2xl rounded-3xl w-full h-full flex flex-col">
+    <h2 class="text-2xl font-bold mb-6 text-purple-600 border-b-2 border-purple-300 pb-2">New Message</h2>
+    <form asp-action="CreateMessage" method="post" class="space-y-6 flex-grow">
+        <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-2xl shadow-md flex flex-col w-full">
+            <label for="Recipient" class="text-lg font-semibold text-purple-700">To:</label>
+            <input type="text" id="ReciverMail" name="ReciverMail" class="p-3 rounded-xl shadow-md border border-gray-300 focus:ring-2 focus:ring-purple-400 focus:outline-none w-full" required>
+
+            <label for="Subject" class="text-lg font-semibold text-purple-700 mt-4">Subject:</label>
+            <input type="text" id="Subject" name="Subject" class="p-3 rounded-xl shadow-md border border-gray-300 focus:ring-2 focus:ring-purple-400 focus:outline-none w-full" required>
+
+            <label for="Details" class="text-lg font-semibold text-purple-700 mt-4">Message:</label>
+            <textarea id="Details" name="Details" rows="6" class="p-3 rounded-xl shadow-md border border-gray-300 focus:ring-2 focus:ring-purple-400 focus:outline-none w-full" required></textarea>
+
+            <div class="mt-12 flex justify-between items-center">
+                <!-- Sol Tarafta Kalacak "Send" Butonu -->
+                <button type="submit" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-3 rounded-xl hover:scale-105 transition-transform">
+                    Send
+                </button>
+
+                <!-- Sağ Tarafta Kalacak Butonlar -->
+                <div class="flex space-x-4">
+                    <button type="submit" formaction="@Url.Action("SaveDraft", "Message")"
+                            formmethod="post" class="text-purple-600 hover:text-purple-900 transition">
+                        Save as Draft
+                    </button>
+
+                    <button onclick="window.location.href='@Url.Action("Inbox", "Message")'"
+                            class="text-purple-600 hover:text-purple-800 transition">
+                        | Back to Inbox
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</section>

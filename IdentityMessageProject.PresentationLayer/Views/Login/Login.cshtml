@@ -1,0 +1,55 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MailSphere</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://media.istockphoto.com/id/1482432255/tr/vekt%C3%B6r/abstract-blurred-gradient-background-colours-with-dynamic-effect.jpg?s=612x612&w=0&k=20&c=FJ8-iAC0stwYbdN8k2tjA1fxBIAX5tGs8J7-A5vN6n4=');
+            background-size: cover;
+            background-position: center;
+            filter: blur(100px) brightness(0.7) saturate(1.2);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-b from-blue-100/50 to-purple-100/50">
+    <div class="w-full max-w-md bg-white bg-opacity-90 p-8 rounded-3xl shadow-2xl">
+        <h1 class="text-4xl font-extrabold text-purple-600 text-center mb-6">MailSphere</h1>
+        <form action="/Login/Login" method="POST">
+            <div class="mb-6">
+                <label for="Email" class="block text-lg font-semibold text-gray-700">Email</label>
+                <input type="text" asp-for="Email" name="Email" class="w-full p-4 mt-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-lg font-semibold text-gray-700">Password</label>
+                <input type="password" id="Password" name="Password" class="w-full p-4 mt-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-purple-500" placeholder="Enter your password" required>
+            </div>
+            @* <div class="flex justify-between items-center mb-6">
+                <label for="remember" class="flex items-center text-gray-700">
+                    <input type="checkbox" id="remember" class="mr-2"> Remember Me
+                </label>
+            </div> *@
+            <button type="submit" class="w-full p-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold text-lg rounded-lg hover:scale-105 transition-transform">Login</button>
+        </form>
+        
+    </div>
+</body>
+</html>
+
+

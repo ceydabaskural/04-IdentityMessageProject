@@ -1,0 +1,36 @@
+﻿@model IdentityMessageProject.EntityLayer.Concrete.Message
+@{
+    ViewData["Title"] = "Reply";
+    Layout = "~/Views/Shared/_MessageLayout.cshtml";
+}
+
+<section class="bg-white bg-opacity-90 p-8 shadow-2xl rounded-3xl w-full flex flex-col">
+    <h2 class="text-2xl font-bold mb-6 text-purple-600 border-b-2 border-purple-300 pb-2">Reply to Email</h2>
+    <div class="space-y-6 flex-grow">
+        <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-2xl shadow-md flex flex-col w-full h-full">
+            <!-- Orijinal mesaj bilgilerini göster -->
+            <div class="text-lg font-semibold text-purple-700">Subject: <span class="text-black">@Model.Subject</span></div>
+            <div class="text-sm text-gray-600 mt-2">From: <span class="font-semibold">@Model.SenderMail</span></div>
+            <div class="text-sm text-gray-500 mt-2">To: <span class="font-semibold">@Model.ReciverMail</span></div>
+            <div class="text-sm text-gray-500 mt-2">Date: <span class="font-semibold">@Model.Date.ToString("h:mm tt, yyyy-MM-dd")</span></div>
+
+            <!-- Form Başlangıcı -->
+            <form method="post" action="@Url.Action("Reply", "Message", new { messageId = Model.MessageId })">
+                <input type="hidden" name="ParentMessageId" value="@Model.ParentMessageId" />
+                <input type="hidden" name="Subject" value="@Model.Subject" />
+                <input type="hidden" name="ReciverMail" value="@Model.SenderMail" />
+
+                <!-- Yanıt Metni -->
+                <div class="mt-6 text-gray-800 flex-grow">
+                    <textarea asp-for="Details" class="w-full p-4 border-2 border-purple-300 rounded-lg resize-none" rows="6" placeholder="Type your reply here..."></textarea>
+                </div>
+
+                <!-- Form Gönderme ve İptal Butonları -->
+                <div class="mt-5 flex justify-between">
+                    <button type="submit" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-3 rounded-xl hover:scale-105 transition-transform">Send Reply</button>
+                    <button onclick="window.location.href='@Url.Action("Sentbox", "Message")'" class="text-purple-600 hover:text-purple-800 transition">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

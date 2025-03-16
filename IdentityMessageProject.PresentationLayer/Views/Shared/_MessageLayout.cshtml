@@ -1,0 +1,94 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentbox - MailSphere</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://source.unsplash.com/1920x1080/?email,workspace,abstract');
+            background-size: cover;
+            background-position: center;
+            filter: blur(12px) brightness(0.7) saturate(1.2);
+            z-index: -1;
+          
+
+            }
+        /* Başlangıçta sayıları görünür yap */
+        #inbox-count, #sentbox-count, #drafts-count {
+            visibility: visible;
+        }
+
+        /* Tıklanmış itemin sayısını gizle */
+        #inbox-item:focus-within #inbox-count,
+        #sentbox-item:focus-within #sentbox-count,
+        #drafts-item:focus-within #drafts-count {
+            visibility: hidden;
+        }
+       
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-gradient-to-b from-blue-100/50 to-purple-100/50">
+    <header class="bg-gradient-to-r from-blue-500 to-purple-500 bg-opacity-90 shadow-xl p-5 flex justify-between items-center rounded-b-3xl">
+        <h1 class="text-3xl font-extrabold text-white drop-shadow-lg">MailSphere</h1>
+        <nav>
+            <a href="/Message/Inbox/" class="text-white px-4 hover:underline transition">Inbox</a>
+            <a href="/Message/Sentbox/" class="text-white px-4 hover:underline transition">Sent</a>
+            <a href="/Message/Drafts/" class="text-white px-4 hover:underline transition">Drafts</a>
+            <a href="/Login/LogOut/" class="text-white px-4 hover:underline transition">LogOut</a>
+        </nav>
+    </header>
+    <main class="flex-grow p-8 grid grid-cols-4 gap-8">
+        <aside class="bg-white bg-opacity-90 p-6 shadow-2xl rounded-3xl flex flex-col items-start">
+            <button onclick="window.location.href='@Url.Action("CreateMessage", "Message")'" class="bg-gradient-to-r from-purple-500 to-blue-500 text-white w-full p-4 rounded-2xl mb-6 hover:scale-105 transition-transform">Compose</button>
+            <ul class="w-full space-y-5 text-lg">
+                <li class="flex justify-between items-center bg-blue-100 text-blue-900 font-semibold px-4 py-2 rounded-lg" id="inbox-item">
+                    <a href="/Message/Inbox/" class="flex items-center space-x-2">
+                        <span>📥</span>
+                        <span>Inbox</span>
+                    </a>
+                    <span class="text-blue-900" id="inbox-count">@ViewBag.i</span> <!-- Dinamik sayı -->
+                </li>
+                <li class="flex justify-between items-center bg-blue-100 text-blue-900 font-semibold px-4 py-2 rounded-lg" id="sentbox-item">
+                    <a href="/Message/Sentbox/" class="flex items-center space-x-2">
+                        <span>📤</span>
+                        <span>Sent</span>
+                    </a>
+                    <span class="text-blue-900" id="sentbox-count">@ViewBag.s</span> <!-- Dinamik sayı -->
+                </li>
+                <li class="flex justify-between items-center bg-blue-100 text-blue-900 font-semibold px-4 py-2 rounded-lg" id="drafts-item">
+                    <a href="/Message/Drafts/" class="flex items-center space-x-2">
+                        <span>📝</span>
+                        <span>Drafts</span>
+                    </a>
+                    <span class="text-blue-900" id="drafts-count">@ViewBag.d</span> <!-- Dinamik sayı -->
+                </li>
+                <li class="flex justify-between items-center bg-blue-100 text-blue-900 font-semibold px-4 py-2 rounded-lg" id="drafts-item">
+                    <a href="/Message/Bin/" class="flex items-center space-x-2">
+                        <span>🗑️</span>
+                        <span>Bin</span>
+                    </a>
+                    <span class="text-blue-900" id="drafts-count">@ViewBag.b</span> <!-- Dinamik sayı -->
+                </li>
+            </ul>
+        </aside>
+        <div class="col-span-3 w-full h-full">
+            @RenderBody()
+        </div>
+    </main>
+    <footer class="bg-gradient-to-r from-blue-500 to-purple-500 bg-opacity-90 shadow-xl p-5 text-center text-white text-sm rounded-t-3xl">
+        &copy; 2025 MailSphere. Elevating Your Inbox.
+    </footer>
+</body>
+</html>
